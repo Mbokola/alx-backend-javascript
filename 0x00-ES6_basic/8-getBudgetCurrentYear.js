@@ -1,3 +1,4 @@
+// ES6 computed property names
 function getCurrentYear() {
   const date = new Date();
   return date.getFullYear();
