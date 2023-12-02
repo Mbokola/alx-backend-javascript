@@ -1,4 +1,4 @@
-export default async function guardrail(mathFunction) {
+export default function guardrail(mathFunction) {
   const queue = [];
 
   try {
