@@ -1,16 +1,10 @@
 // Read-in user input
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-console.log('Welcome to Holberton School, what is your name?');
-
-readline.on('line', (name) => {
+process.stdin.setEncoding('utf8');
+process.stdout.write('Welcome to Holberton School, what is your name?');
+process.stdin.on('data', (data) => {
+  const name = data.trim();
+  console.log();
   console.log(`Your name is: ${name}`);
-});
-
-readline.on('close', () => {
   console.log('This important software is now closing');
+  process.exit();
 });
