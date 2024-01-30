@@ -2,6 +2,7 @@
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
+  terminal: false,
 });
 
 console.log('Welcome to Holberton School, what is your name?');
