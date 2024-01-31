@@ -4,7 +4,7 @@ function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
     let lines = data.split('\n');
-    lines = lines.filter((item) => item !== '');
+    lines = lines.filter(Boolean);
     const studentCount = lines.length - 1;
     const allFields = lines.map((line) => {
       const fields = line.split(',');
