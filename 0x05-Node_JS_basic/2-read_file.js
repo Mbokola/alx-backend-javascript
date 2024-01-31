@@ -3,9 +3,9 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    let lines = data.split('\n');
-    lines = lines.filter(Boolean);
+    const lines = data.split('\n').filter(Boolean);
     const studentCount = lines.length - 1;
+
     const allFields = lines.map((line) => {
       const fields = line.split(',');
       return {
@@ -14,31 +14,17 @@ function countStudents(path) {
       };
     });
 
-    const arr = [];
-    let names = '';
-
-    for (let i = 1; i < allFields.length; i += 1) {
-      if (!arr.includes(allFields[i].lastField)) {
-        arr.push(allFields[i].lastField);
-      }
-    }
-
+    const uniqueLastFields = [...new Set(allFields.map((student) => student.lastField))];
+    uniqueLastFields.splice(0, 1);
     console.log(`Number of students: ${studentCount}`);
 
-    for (let i = 0; i < arr.length; i += 1) {
-      for (let j = 1; j < allFields.length; j += 1) {
-        if (allFields[j].lastField === arr[i]) {
-          names += `${allFields[j].firstField}, `;
-        }
-      }
-      if (names.endsWith(', ')) {
-        names = names.slice(0, -2);
-      }
-      console.log(`Number of students in ${arr[i]}: ${names.split(', ').length}. List: ${names}`);
-      names = '';
+    for (const lastField of uniqueLastFields) {
+      const matchingStudents = allFields.filter((student) => student.lastField === lastField);
+      const names = matchingStudents.map((student) => student.firstField).join(', ');
+      console.log(`Number of students in ${lastField}: ${matchingStudents.length}. List: ${names}`);
     }
   } catch (error) {
-    throw new Error('Cannot load the database');
+    throw new Error(`Error loading the database: ${error.message}`);
   }
 }
 
