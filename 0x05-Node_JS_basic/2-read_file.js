@@ -24,7 +24,7 @@ function countStudents(path) {
       console.log(`Number of students in ${lastField}: ${matchingStudents.length}. List: ${names}`);
     }
   } catch (error) {
-    throw new Error(`Error loading the database: ${error.message}`);
+    throw new Error('Cannot load the database');
   }
 }
 
