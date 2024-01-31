@@ -3,7 +3,8 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n');
+    let lines = data.split('\n');
+    lines = lines.filter((item) => item !== '');
     const studentCount = lines.length - 1;
     const allFields = lines.map((line) => {
       const fields = line.split(',');
