@@ -24,7 +24,7 @@ function countStudents(path) {
           const names = matchingStudents.map((student) => student.firstField).join(', ');
           console.log(`Number of students in ${lastField}: ${matchingStudents.length}. List: ${names}`);
         }
-        resolve({ studentCount, uniqueLastFields }); // Pass meaningful data to resolve
+        resolve({ studentCount, uniqueLastFields, allFields });
       })
       .catch(() => {
         reject(new Error('Cannot load the database'));
