@@ -10,11 +10,11 @@ const app = http.createServer((req, res) => {
   }
   if (url === '/students') {
     let allFields;
+    res.write('This is the list of our students\n');
 
     countStudents(args[2])
       .then((result) => {
         allFields = result.allFields;
-        res.write('This is the list of our students');
         res.write(`\nNumber of students: ${result.studentCount}`);
         for (const lastField of result.uniqueLastFields) {
           const matchingStudents = allFields.filter((student) => student.lastField === lastField);
@@ -25,7 +25,7 @@ const app = http.createServer((req, res) => {
       })
       .catch(() => {
         res.statusCode = 500;
-        res.end('Error: Cannot load the database');
+        res.end('Cannot load the database');
       });
   }
 });
